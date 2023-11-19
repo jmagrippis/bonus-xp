@@ -1,5 +1,7 @@
 ---
 import '@fontsource-variable/raleway'
+import './globals.css'
+import Header from '@/components/Header/Header.astro'
 
 type Meta = {
 	title?: string
@@ -22,6 +24,41 @@ const description = meta?.description ?? defaultMeta.description
 ---
 
 <!doctype html>
+<script is:inline>
+	// default to dark mode, because **I** like it more :-)
+	const defaultTheme = 'dark'
+	const getTheme = () => {
+		if (typeof localStorage !== 'undefined') {
+			return localStorage.getItem('theme') || defaultTheme
+		}
+		return defaultTheme
+	}
+
+	const theme = getTheme()
+	document.documentElement.dataset.theme = theme
+
+	if (typeof localStorage !== 'undefined') {
+		const observer = new MutationObserver(() => {
+			const nextTheme = document.documentElement.dataset.theme
+			if (nextTheme) {
+				localStorage.setItem('theme', nextTheme)
+			}
+		})
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ['data-theme'],
+		})
+	}
+
+	const toggleTheme = () => {
+		const nextTheme =
+			document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'
+		document.documentElement.dataset.theme = nextTheme
+	}
+
+	window.toggleTheme = toggleTheme
+</script>
+
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -40,72 +77,7 @@ const description = meta?.description ?? defaultMeta.description
 		<meta property="og:url" content={Astro.url.origin + Astro.url.pathname} />
 	</head>
 	<body>
+		<Header />
 		<slot />
 	</body>
 </html>
-<style is:global>
-	/*
-  Additional "resets" based on Josh's article:
-  https://www.joshwcomeau.com/css/custom-css-reset/
-*/
-	*,
-	*::before,
-	*::after {
-		box-sizing: border-box;
-	}
-
-	body {
-		-webkit-font-smoothing: antialiased;
-		isolation: isolate;
-		display: flex;
-		flex-direction: column;
-	}
-
-	input,
-	button,
-	textarea,
-	select {
-		font: inherit;
-	}
-	p,
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		overflow-wrap: break-word;
-	}
-
-	html,
-	body {
-		height: 100%;
-	}
-
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		background: #13151a;
-		background-size: 224px;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-</style>
