@@ -2,6 +2,7 @@
 import '@fontsource-variable/raleway'
 import './globals.css'
 import Header from '@/components/Header/Header.astro'
+import Footer from '@/components/Footer.astro'
 
 type Meta = {
 	title?: string
@@ -78,6 +79,9 @@ const description = meta?.description ?? defaultMeta.description
 	</head>
 	<body>
 		<Header />
-		<slot />
+		<main class="content-grid">
+			<slot />
+		</main>
+		<Footer />
 	</body>
 </html>

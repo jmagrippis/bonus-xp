@@ -7,9 +7,9 @@ type Props = {
 const {href, title} = Astro.props
 ---
 
-<li class="link-card">
+<li class="card">
 	<a href={href}>
-		<h2>
+		<h2 class="mb-2 text-xl font-semibold drop-shadow">
 			{title}
 			<span>&rarr;</span>
 		</h2>
@@ -19,42 +19,62 @@ const {href, title} = Astro.props
 	</a>
 </li>
 <style>
-	.link-card {
-		list-style: none;
-		display: flex;
-		padding: 1px;
-		background-color: #23262d;
-		background-image: none;
-		background-size: 400%;
-		border-radius: 7px;
-		background-position: 100%;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+	/* inspired by Hyperplexed:
+	https://www.youtube.com/watch?v=joDhIH6Xumw */
+	.card {
+		--g1-hue: 265;
+		--g2-hue: 340;
+		--g3-hue: 49;
+
+		--g1: hsl(var(--g1-hue) 90% 87%);
+		--g2: hsl(var(--g2-hue) 70% 92%);
+		--g3: hsl(var(--g3-hue) 88% 80%);
+		--_animation-duration: var(--short-animation-duration);
+
+		@apply relative rounded border border-foreground-accent shadow;
+
+		> a {
+			background-image: radial-gradient(
+				hsl(var(--surface-brand-2-color)) 8%,
+				transparent 8%
+			);
+			background-position: 0% 0%;
+			background-size: 2rem 2rem;
+			transition: background-position var(--_animation-duration) ease;
+			z-index: 2;
+
+			@apply relative block h-full w-full px-6 py-4;
+		}
+
+		&:before {
+			content: '';
+			background: linear-gradient(
+				130deg,
+				transparent 0 33%,
+				var(--g1) 66%,
+				var(--g2) 83.5%,
+				var(--g3) 100%
+			);
+			background-position: 0 0;
+			background-size: 300% 300%;
+			transition: background-position var(--_animation-duration) ease;
+			@apply absolute left-0 top-0 h-full w-full rounded;
+		}
+
+		&:hover {
+			&:before {
+				background-position: 100% 100%;
+			}
+
+			> a {
+				background-position: -10% 0%;
+			}
+		}
 	}
-	.link-card > a {
-		width: 100%;
-		text-decoration: none;
-		line-height: 1.4;
-		padding: calc(1.5rem - 1px);
-		border-radius: 8px;
-		color: white;
-		background-color: #23262d;
-		opacity: 0.8;
-	}
-	h2 {
-		margin: 0;
-		font-size: 1.25rem;
-		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	p {
-		margin-top: 0.5rem;
-		margin-bottom: 0;
-	}
-	.link-card:is(:hover, :focus-within) {
-		background-position: 0;
-		background-image: var(--accent-gradient);
-	}
-	.link-card:is(:hover, :focus-within) h2 {
-		color: rgb(var(--accent-light));
+
+	:global([data-theme='dark']) .card {
+		--g1: hsl(var(--g1-hue) 100% 46%);
+		--g2: hsl(var(--g2-hue) 82% 46%);
+		--g3: hsl(var(--g3-hue) 98% 46%);
 	}
 </style>

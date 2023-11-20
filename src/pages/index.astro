@@ -4,30 +4,34 @@ import Card from '../components/Card.astro'
 ---
 
 <Layout>
-	<main>
-		<h1 class="flex flex-col py-32 text-center text-5xl font-bold">
-			<span>Welcome to</span>
-			<span
-				class="bg-gradient-to-t from-green-400 to-purple-700 bg-clip-text text-transparent dark:from-green-200 dark:to-purple-500"
-				>Bonus XP</span
-			>
-		</h1>
-		<p class="mb-8 text-2xl">Where exploration and play levels you up!</p>
-		<ul class="grid gap-8 sm:grid-cols-2">
-			<Card href="https://docs.astro.build/" title="Courses">
-				Learn <strong>Fullstack Typescript</strong> development with our
-				open-source and free courses!
-			</Card>
-			<Card href="https://astro.build/integrations/" title="Play">
-				Come try our free browser-based games, implemented in a variety of
-				Javascript Frameworks!
-			</Card>
-			<Card href="https://astro.build/themes/" title="Videos">
-				Explore a galaxy of community-built starter themes
-			</Card>
-			<Card href="https://astro.build/chat/" title="Community">
-				Come say hi to our amazing Discord community 💜
-			</Card>
-		</ul>
-	</main>
+	<h1 class="flex flex-col py-32 text-center text-5xl font-bold">
+		<span>Welcome to</span>
+		<span
+			class="bg-gradient-to-t from-green-600 to-purple-600 bg-clip-text text-transparent drop-shadow dark:from-green-200 dark:to-purple-500"
+			>Bonus XP</span
+		>
+	</h1>
+	<p class="breakout mb-32 text-center text-2xl">
+		Where curiousity journeys, exploration, and play, <strong
+			class="bg-gradient-to-t from-green-600 to-purple-600 bg-clip-text text-transparent drop-shadow dark:from-green-200 dark:to-purple-500"
+			>level you up</strong
+		>!
+	</p>
+	<ul class="breakout grid gap-8 md:grid-cols-2">
+		<Card href="/courses" title="Courses">
+			Learn <strong>Fullstack Typescript</strong> development with our
+			open-source and free courses!
+		</Card>
+		<Card href="/play" title="Play">
+			Try our free browser-based games, implemented in a variety of Javascript
+			Frameworks!
+		</Card>
+		<Card href="https://www.youtube.com/@johnnifytech" title="Videos & Streams">
+			Watch quick fluff-free guides and tutorials & long live-coding streams,
+			over at our YouTube channel!
+		</Card>
+		<Card href="https://discord.gg/sBDVbus2fk" title="Community">
+			Join our amazing Discord community 💜 Suggest games, courses, and more!
+		</Card>
+	</ul>
 </Layout>

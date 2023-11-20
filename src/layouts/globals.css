@@ -34,12 +34,10 @@
 		overflow-wrap: break-word;
 	}
 
-	html,
-	body {
-		min-height: 100%;
-	}
-
 	:root {
+		--padding-inline: clamp(1rem, 5vw, 3rem);
+		--short-animation-duration: 300ms;
+
 		--brand-hue: 158deg;
 		--accent-hue: 271deg;
 
@@ -59,6 +57,8 @@
 		--surface-brand-2-color-dark: var(--brand-hue) 84% 17%;
 		--surface-accent-1-color-dark: var(--accent-hue) 90% 21%;
 	}
+
+	/* light theme setup */
 	:root {
 		color-scheme: light;
 
@@ -70,6 +70,7 @@
 		--surface-accent-1-color: var(--surface-accent-1-color-light);
 	}
 
+	/* dark theme setup */
 	[data-theme='dark'] {
 		color-scheme: dark;
 
@@ -81,8 +82,52 @@
 		--surface-accent-1-color: var(--surface-accent-1-color-dark);
 	}
 
+	body {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+
 	html {
-		@apply from-surface-brand-1 text-foreground-brand bg-gradient-to-b from-75% bg-fixed text-lg transition-colors dark:to-stone-950;
+		@apply bg-gradient-to-b from-surface-brand-1 from-75% bg-fixed text-lg text-foreground-brand transition-colors dark:to-stone-950;
+	}
+
+	/* SmollCSS Stephanie + Kevin-style breakout grid
+	https://www.youtube.com/watch?v=c13gpBrnGEw */
+	.content-grid,
+	.full-width {
+		--_content-max-width: 70ch;
+		--_breakout-max-width: 90ch;
+
+		--_full-width-size: minmax(var(--padding-inline), 1fr);
+		--_breakout-size: minmax(
+			0,
+			calc((var(--_breakout-max-width) - var(--_content-max-width)) / 2)
+		);
+		--_content-size: min(
+			100% - var(--padding-inline) * 2,
+			var(--_content-max-width)
+		);
+
+		display: grid;
+		grid-template-columns:
+			[full-width-start] var(--_full-width-size)
+			[breakout-start] var(--_breakout-size)
+			[content-start] var(--_content-size) [content-end]
+			var(--_breakout-size) [breakout-end]
+			var(--_full-width-size) [full-width-end];
+
+		> :not(.breakout, .full-width) {
+			grid-column: content;
+		}
+
+		> .breakout {
+			grid-column: breakout;
+		}
+
+		> .full-width {
+			grid-column: full-width;
+		}
 	}
 }
 
