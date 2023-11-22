@@ -18,19 +18,23 @@ import Card from '../components/Card.astro'
 		>!
 	</p>
 	<ul class="breakout grid gap-8 md:grid-cols-2">
-		<Card href="/courses" title="Courses">
+		<Card tag="li" href="/courses/sveltekit-learn" title="Courses">
 			Learn <strong>Fullstack Typescript</strong> development with our
 			open-source and free courses!
 		</Card>
-		<Card href="/play" title="Play">
+		<Card tag="li" href="/play" title="Play">
 			Try our free browser-based games, implemented in a variety of Javascript
 			Frameworks!
 		</Card>
-		<Card href="https://www.youtube.com/@johnnifytech" title="Videos & Streams">
+		<Card
+			tag="li"
+			href="https://www.youtube.com/@johnnifytech"
+			title="Videos & Streams"
+		>
 			Watch quick fluff-free guides and tutorials & long live-coding streams,
 			over at our YouTube channel!
 		</Card>
-		<Card href="https://discord.gg/sBDVbus2fk" title="Community">
+		<Card tag="li" href="https://discord.gg/sBDVbus2fk" title="Community">
 			Join our amazing Discord community 💜 Suggest games, courses, and more!
 		</Card>
 	</ul>

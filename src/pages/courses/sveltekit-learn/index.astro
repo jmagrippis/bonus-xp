@@ -1,0 +1,84 @@
+---
+import Card from '@/components/Card.astro'
+import Layout from '@/layouts/Layout.astro'
+import {getCollection} from 'astro:content'
+
+const meta = {
+	title: 'SvelteKit/Learn!',
+	description:
+		'Transition from HTML & Javascript basics, to deploying fullstack apps with SvelteKit! Particularly ideal for engineers transitioning from React or even Next.js fundamentals.',
+}
+
+const [firstChapterEntry] = await getCollection('sveltekit-learn', ({data}) => {
+	return data.chapterNumber === 1
+})
+---
+
+<Layout meta={meta}>
+	<article class="brand-prose pt-[5vh]">
+		<section>
+			<h1>Start building with SvelteKit</h1>
+			<p>
+				Go from beginner to expert by learning the foundations of SvelteKit and
+				building a fully functional demo website that uses all the latest
+				features.
+			</p>
+		</section>
+		<div class="not-prose">
+			<Card
+				title={`Chapter 1: ${firstChapterEntry.data.title}`}
+				href={`/courses/sveltekit-learn/${firstChapterEntry.slug}`}
+			>
+				{firstChapterEntry.data.description}
+			</Card>
+		</div>
+		<!-- <Hero chapterCount={data.chapterCount} /> -->
+		<section class="mb-8 flex flex-col justify-center px-2">
+			<h2>How does this course work?</h2>
+			<p class="text-emphasis italic">
+				By building a full web application. Step by step.
+			</p>
+		</section>
+		<section class="px-2">
+			<h2>Extra Resources</h2>
+			<p>
+				<strong>Learn SvelteKit</strong> is <em>heavily</em> inspired by
+				<a
+					href="https://nextjs.org/learn"
+					target="_blank"
+					rel="noopener noreferrer">Next.js/Learn</a
+				>, Vercel's official, free, Next.js course.
+			</p>
+			<p>
+				SvelteKit, like any other framework, is an implementation detail! So
+				we’ll be following the same structure, and building the same final
+				app... Only difference being, we’ll be implementing “the SvelteKit way”!
+			</p>
+			<p>
+				You can see me, Johnny, <a
+					href="https://www.youtube.com/watch?v=l07E3GZLwTc"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hover:text-emphasis-hover inline-flex items-center gap-2"
+				>
+					go through that whole course</a
+				>, live!
+			</p>
+			<p>
+				This course, the SvelteKit version with a bit of my own spice, is under
+				development, so <a
+					href="https://www.youtube.com/@johnnifytech?sub_confirmation=1"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hover:text-emphasis-hover inline-flex items-center gap-2"
+				>
+					subscribe to my channel
+				</a> and we can go through it and evolve it live!
+			</p>
+			<p>
+				Watching my content helps solidify that if I do have a seemingly hot
+				take, I’m actually smiling all the while 😄
+			</p>
+		</section>
+	</article>
+</Layout>

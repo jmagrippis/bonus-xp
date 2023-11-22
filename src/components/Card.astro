@@ -1,13 +1,16 @@
 ---
+import type {HTMLTag} from 'astro/types'
+
 type Props = {
 	title: string
 	href: string
+	tag?: HTMLTag
 }
 
-const {href, title} = Astro.props
+const {href, title, tag: Element = 'div'} = Astro.props
 ---
 
-<li class="card">
+<Element class="card">
 	<a href={href}>
 		<h2 class="mb-2 text-xl font-semibold drop-shadow">
 			{title}
@@ -17,7 +20,7 @@ const {href, title} = Astro.props
 			<slot />
 		</p>
 	</a>
-</li>
+</Element>
 <style>
 	/* inspired by Hyperplexed:
 	https://www.youtube.com/watch?v=joDhIH6Xumw */
