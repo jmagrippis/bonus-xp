@@ -1,5 +1,6 @@
 ---
 import Card from '@/components/Card.astro'
+import PageTitle from '@/components/PageTitle.astro'
 import Layout from '@/layouts/Layout.astro'
 import {getCollection} from 'astro:content'
 
@@ -17,7 +18,7 @@ const [firstChapterEntry] = await getCollection('sveltekit-learn', ({data}) => {
 <Layout meta={meta}>
 	<article class="brand-prose pt-[5vh]">
 		<section>
-			<h1>Start building with SvelteKit</h1>
+			<PageTitle>Start building with SvelteKit</PageTitle>
 			<p>
 				Go from beginner to expert by learning the foundations of SvelteKit and
 				building a fully functional demo website that uses all the latest

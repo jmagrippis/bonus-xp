@@ -1,0 +1,29 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import PageTitle from '@/components/PageTitle.astro'
+
+const meta = {
+	title: 'Play',
+	description:
+		'Play our browser games, lovingly made in a variety of frameworks! To compare, contrast, and have fun 😄',
+}
+---
+
+<Layout meta={meta}>
+	<section class="brand-prose pt-[5vh]">
+		<PageTitle>Play</PageTitle>
+		<p>
+			Play our browser games, lovingly made in a variety of frameworks! To
+			compare, contrast, and have fun 😄
+		</p>
+		<p>
+			We are always looking for recommendations of what you’d like to see us
+			implement, so feel free to submit your ideas, or link to cool stuff from
+			places such as <a
+				href="https://www.frontendmentor.io/challenges"
+				target="_blank"
+				rel="noopener noreferrer">Frontend Mentor</a
+			>!
+		</p>
+	</section>
+</Layout>

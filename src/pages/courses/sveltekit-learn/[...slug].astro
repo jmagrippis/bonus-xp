@@ -1,6 +1,7 @@
 ---
 import {getCollection} from 'astro:content'
 import Layout from '@/layouts/Layout.astro'
+import PageTitle from '@/components/PageTitle.astro'
 
 export async function getStaticPaths() {
 	const blogEntries = await getCollection('sveltekit-learn')
@@ -19,8 +20,8 @@ const meta = {
 ---
 
 <Layout meta={meta}>
-	<article class="brand-prose">
-		<h1>{entry.data.title}</h1>
+	<article class="brand-prose pt-[5vh]">
+		<PageTitle>{entry.data.title}</PageTitle>
 		<Content />
 	</article>
 </Layout>

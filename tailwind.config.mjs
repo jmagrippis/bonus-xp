@@ -1,7 +1,10 @@
+import typography from '@tailwindcss/typography'
+import colors from 'tailwindcss/colors'
+
 const withAlphaValue = (varName) => `hsl(var(--${varName}) / <alpha-value>)`
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const config = {
 	darkMode: ['class', '[data-theme="dark"]'],
 	content: ['./src/**/*.{astro,html,md,mdx,svelte,ts,tsx}'],
 	theme: {
@@ -10,6 +13,8 @@ module.exports = {
 		},
 		extend: {
 			colors: {
+				primary: colors.emerald,
+				secondary: colors.purple,
 				foreground: {
 					brand: withAlphaValue('foreground-brand-color'),
 					accent: withAlphaValue('foreground-accent-color'),
@@ -26,5 +31,7 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [require('@tailwindcss/typography')],
+	plugins: [typography],
 }
+
+export default config
