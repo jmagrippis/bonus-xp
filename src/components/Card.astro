@@ -25,9 +25,9 @@ const {href, title, tag: Element = 'div'} = Astro.props
 	/* inspired by Hyperplexed:
 	https://www.youtube.com/watch?v=joDhIH6Xumw */
 	.card {
-		--g1-hue: 265;
-		--g2-hue: 340;
-		--g3-hue: 49;
+		--g1-hue: var(--brand-hue);
+		--g2-hue: var(--accent-hue);
+		--g3-hue: 340;
 
 		--g1: hsl(var(--g1-hue) 90% 87%);
 		--g2: hsl(var(--g2-hue) 70% 92%);

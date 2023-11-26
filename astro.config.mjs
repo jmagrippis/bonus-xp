@@ -11,6 +11,11 @@ export default defineConfig({
 			locales: ['en', 'el'],
 		},
 	},
+	markdown: {
+		shikiConfig: {
+			theme: 'dracula',
+		},
+	},
 	prefetch: true,
 	integrations: [
 		tailwind({
