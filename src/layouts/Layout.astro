@@ -76,6 +76,11 @@ const description = meta?.description ?? defaultMeta.description
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Bonus XP" />
 		<meta property="og:url" content={Astro.url.origin + Astro.url.pathname} />
+		<script
+			type="text/partytown"
+			defer
+			data-domain="bonusxp.dev"
+			src="https://plausible.io/js/script.js"></script>
 	</head>
 	<body>
 		<Header />
