@@ -18,7 +18,7 @@ jobs:
       - name: Run Playwright tests against ${{ github.event.deployment_status.target_url }}
         run: pnpm exec playwright test
         env:
-          NEXT_PUBLIC_ROOT_URL: ${{ github.event.deployment_status.target_url }}
+          PUBLIC_ROOT_URL: ${{ github.event.deployment_status.target_url }}
       - uses: actions/upload-artifact@v3
         if: always()
         with:
