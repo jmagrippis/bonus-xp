@@ -1,5 +1,7 @@
 import {ImageResponse} from '@vercel/og'
 
+export const prerender = false
+
 export async function GET({request}: {request: Request}) {
 	const sansFont = await fetch(
 		new URL('/fonts/Raleway-Medium.ttf', request.url),

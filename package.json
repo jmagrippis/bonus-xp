@@ -16,6 +16,7 @@
 		"@astrojs/partytown": "^2.0.2",
 		"@astrojs/solid-js": "^3.0.2",
 		"@astrojs/tailwind": "^5.0.2",
+		"@astrojs/vercel": "^5.2.0",
 		"@fontsource-variable/raleway": "^5.0.16",
 		"@tailwindcss/typography": "^0.5.10",
 		"@vercel/og": "^0.5.20",
@@ -31,11 +32,8 @@
 		"prettier-plugin-astro": "^0.12.2",
 		"prettier-plugin-tailwindcss": "^0.5.7"
 	},
-	"engines": {
-		"node": "20.x"
-	},
 	"packageManager": "pnpm@8.11.0",
 	"volta": {
-		"node": "20.10.0"
+		"node": "18.19.0"
 	}
 }
