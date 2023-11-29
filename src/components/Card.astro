@@ -5,12 +5,13 @@ type Props = {
 	title: string
 	href: string
 	tag?: HTMLTag
+	class?: string
 }
 
-const {href, title, tag: Element = 'div'} = Astro.props
+const {href, title, tag: Element = 'div', class: className = ''} = Astro.props
 ---
 
-<Element class="card">
+<Element class={`card ${className}`}>
 	<a href={href}>
 		<h2 class="mb-2 text-xl font-semibold drop-shadow">
 			{title}

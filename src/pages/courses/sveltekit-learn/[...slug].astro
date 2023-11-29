@@ -3,6 +3,7 @@ import {getCollection} from 'astro:content'
 import Layout from '@/layouts/Layout.astro'
 import PageTitle from '@/components/PageTitle.astro'
 import Card from '@/components/Card.astro'
+import BreakoutPre from '@/components/mdx/BreakoutPre.astro'
 
 export async function getStaticPaths() {
 	const blogEntries = await getCollection('sveltekit-learn')
@@ -23,21 +24,44 @@ const meta = {
 const [nextChapter] = await getCollection('sveltekit-learn', ({data}) => {
 	return data.chapterNumber === entry.data.chapterNumber + 1
 })
+const [prevChapter] = await getCollection('sveltekit-learn', ({data}) => {
+	return data.chapterNumber === entry.data.chapterNumber - 1
+})
+
+const components = {
+	pre: BreakoutPre,
+}
 ---
 
 <Layout meta={meta}>
-	<article class="brand-prose full-width pt-[5vh]">
+	<article class="brand-prose full-width self-start pt-[5vh]">
 		<PageTitle>{entry.data.title}</PageTitle>
-		<Content />
+		<Content components={components} />
+		{
+			prevChapter || nextChapter ? (
+				<ul class="not-prose grid gap-4 lg:grid-cols-3">
+					{prevChapter && (
+						<Card
+							class="self-start"
+							tag="li"
+							title={`Chapter ${prevChapter.data.chapterNumber}: ${prevChapter.data.title}`}
+							href={`/courses/sveltekit-learn/${prevChapter.slug}`}
+						>
+							{prevChapter.data.description}
+						</Card>
+					)}
+					{nextChapter && (
+						<Card
+							class="order-first self-start lg:order-2 lg:col-span-2"
+							tag="li"
+							title={`Chapter ${nextChapter.data.chapterNumber}: ${nextChapter.data.title}`}
+							href={`/courses/sveltekit-learn/${nextChapter.slug}`}
+						>
+							{nextChapter.data.description}
+						</Card>
+					)}
+				</ul>
+			) : null
+		}
 	</article>
-	{
-		nextChapter && (
-			<Card
-				title={`Chapter ${nextChapter.data.chapterNumber}: ${nextChapter.data.title}`}
-				href={`/courses/sveltekit-learn/${nextChapter.slug}`}
-			>
-				{nextChapter.data.description}
-			</Card>
-		)
-	}
 </Layout>

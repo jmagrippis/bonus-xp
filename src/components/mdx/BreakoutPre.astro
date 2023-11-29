@@ -1,0 +1,5 @@
+---
+const {class: className, ...restProps} = Astro.props
+---
+
+<pre class={`${className} breakout`} {...restProps}><slot /></pre>
