@@ -7,6 +7,10 @@ import vercel from '@astrojs/vercel/serverless'
 
 // https://astro.build/config
 export default defineConfig({
+	site:
+		process.env.PUBLIC_ROOT_URL ||
+		process.env.VERCEL_URL ||
+		'https://localhost:4321',
 	experimental: {
 		i18n: {
 			defaultLocale: 'en',
