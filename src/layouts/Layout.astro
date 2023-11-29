@@ -7,11 +7,13 @@ import Footer from '@/components/Footer.astro'
 type Meta = {
 	title?: string
 	description?: string
+	ogImageUrl?: string
 }
 
 const defaultMeta: Meta = {
 	title: 'Bonus XP 🧙‍♀️',
 	description: 'Explore, adventure, and learn how to code the fun way!',
+	ogImageUrl: Astro.url.origin + '/og.png',
 }
 
 type Props = {
@@ -22,6 +24,7 @@ const {meta} = Astro.props
 
 const title = meta?.title ? `${meta.title} 🧙‍♀️ Bonus XP` : defaultMeta.title
 const description = meta?.description ?? defaultMeta.description
+const ogImageUrl = meta?.ogImageUrl ?? defaultMeta.ogImageUrl
 ---
 
 <!doctype html>
@@ -64,7 +67,6 @@ const description = meta?.description ?? defaultMeta.description
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 
 		<title>{title}</title>
@@ -76,6 +78,18 @@ const description = meta?.description ?? defaultMeta.description
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Bonus XP" />
 		<meta property="og:url" content={Astro.url.origin + Astro.url.pathname} />
+
+		<meta property="og:image" content={ogImageUrl} />
+		<meta name="twitter:card" content="summary_large_image" />
+
+		<!-- Favicons -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#059669" />
+		<meta name="theme-color" content="#059669" />
+
 		<script
 			type="text/partytown"
 			defer
