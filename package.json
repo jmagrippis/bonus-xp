@@ -8,12 +8,12 @@
 		"build": "astro check && astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"test:e2e": "playwright test"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.3.1",
 		"@astrojs/mdx": "^1.1.5",
-		"@astrojs/partytown": "^2.0.2",
 		"@astrojs/solid-js": "^3.0.2",
 		"@astrojs/tailwind": "^5.0.2",
 		"@astrojs/vercel": "^5.2.0",

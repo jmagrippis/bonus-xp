@@ -7,7 +7,12 @@ test('navigation smoke test', async ({page}) => {
 	await expect(page).toHaveTitle(/Bonus XP/)
 
 	// navigate to Courses
-	await page.getByRole('heading', {name: 'courses', level: 2}).click()
+	await page
+		.getByRole('link', {name: 'courses'})
+		// Safari wants you to literally click the link,
+		// so we cannot just click the header
+		.filter({has: page.getByRole('heading', {name: 'courses', level: 2})})
+		.click()
 	// should get you straight to the only course, SvelteKit/Learn
 	await expect(page).toHaveTitle(/SvelteKit\/Learn/)
 	await expect(
@@ -22,7 +27,10 @@ test('navigation smoke test', async ({page}) => {
 	await expect(page).toHaveTitle(/Bonus XP/)
 
 	// navigate to Play
-	await page.getByRole('heading', {name: 'play', level: 2}).click()
+	await page
+		.getByRole('link', {name: 'play'})
+		.filter({has: page.getByRole('heading', {name: 'play', level: 2})})
+		.click()
 	await expect(page).toHaveTitle(/Play/)
 	await expect(
 		page.getByRole('heading', {
