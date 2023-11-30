@@ -26,6 +26,12 @@ export default defineConfig({
 		/* Base URL to use in actions like `await page.goto('/')`. */
 		baseURL: process.env.PUBLIC_ROOT_URL || 'http://localhost:4321',
 
+		// disable the Vercel deploy comments toolbar
+		// https://vercel.com/docs/workflow-collaboration/comments/specialized-usage
+		extraHTTPHeaders: {
+			'x-vercel-skip-toolbar': '1',
+		},
+
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: 'on-first-retry',
 		video: 'retain-on-failure',
@@ -55,7 +61,7 @@ export default defineConfig({
 		// },
 		{
 			name: 'Mobile Safari',
-			use: {...devices['iPhone 14']},
+			use: {...devices['iPhone 14 Pro Max']},
 		},
 
 		/* Test against branded browsers. */
