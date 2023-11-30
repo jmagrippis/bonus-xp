@@ -5,6 +5,12 @@ test('navigation smoke test', async ({page}) => {
 	await page.goto('/')
 
 	await expect(page).toHaveTitle(/Bonus XP/)
+	await expect(
+		page.getByRole('heading', {
+			name: 'Bonus XP',
+			level: 1,
+		}),
+	).toBeVisible()
 
 	// navigate to Courses
 	await page
@@ -25,6 +31,12 @@ test('navigation smoke test', async ({page}) => {
 	// navigate back home
 	await page.getByRole('link', {name: 'Bonus XP'}).click()
 	await expect(page).toHaveTitle(/Bonus XP/)
+	await expect(
+		page.getByRole('heading', {
+			name: 'Bonus XP',
+			level: 1,
+		}),
+	).toBeVisible()
 
 	// navigate to Play
 	await page
