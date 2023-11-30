@@ -40,9 +40,6 @@ const ogImageUrl = meta?.ogImageUrl ?? defaultMeta.ogImageUrl
 		return defaultTheme
 	}
 
-	const theme = getTheme()
-	document.documentElement.dataset.theme = theme
-
 	const setTheme = (document) => {
 		const theme = getTheme()
 		document.documentElement.dataset.theme = theme
@@ -50,8 +47,8 @@ const ogImageUrl = meta?.ogImageUrl ?? defaultMeta.ogImageUrl
 
 	setTheme(document)
 
-	// Ensure theme is set for view transitons
 	document.addEventListener('astro:before-swap', (event) => {
+		// Ensure theme is set for view transitons
 		setTheme(event.newDocument)
 	})
 
