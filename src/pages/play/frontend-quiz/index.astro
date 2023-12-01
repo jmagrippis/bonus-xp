@@ -1,0 +1,45 @@
+---
+import FrontendQuizLayout from '@/layouts/FrontendQuizLayout.astro'
+import SubtleText from '@/components/play/frontend-quiz/SubtleText.astro'
+import IconLabel from '@/components/play/frontend-quiz/IconLabel.astro'
+
+import {subjects} from './_subjects'
+
+export const prerender = false
+
+const meta = {
+	title: 'Frontend Quiz',
+	description:
+		'Test your frontend skills in a variety of subjects, by answering multiple choice questions!',
+}
+---
+
+<FrontendQuizLayout meta={meta}>
+	<div class="grid gap-10 md:gap-16 lg:grid-cols-2">
+		<section class="flex flex-col gap-4 lg:gap-12">
+			<h1 class="flex flex-col gap-2 text-4xl lg:text-5xl">
+				Welcome to the <strong>Frontend Quiz!</strong>
+			</h1>
+			<SubtleText class="text-sm italic text-foreground-brand/70">
+				Pick a subject to get started.
+			</SubtleText>
+		</section>
+		<ul class="flex flex-col gap-3 md:gap-6">
+			{
+				subjects.map(({name, slug, icon: Icon, hsl}) => (
+					<li class="cursor-pointer rounded-xl border border-surface-brand-2 bg-surface-brand-2 p-3 text-lg font-medium shadow md:text-2xl">
+						<a
+							href={`/play/frontend-quiz/${slug}`}
+							class="flex items-center gap-4 md:gap-8"
+						>
+							<IconLabel hsl={hsl}>
+								<Icon />
+							</IconLabel>
+							<span>{name}</span>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</FrontendQuizLayout>
