@@ -1,6 +1,9 @@
 ---
+import {Picture} from 'astro:assets'
+
 import Layout from '@/layouts/Layout.astro'
 import PageTitle from '@/components/PageTitle.astro'
+import frontendQuizHero from './frontend-quiz.png'
 
 const meta = {
 	title: 'Play',
@@ -26,4 +29,27 @@ const meta = {
 			>!
 		</p>
 	</section>
+	<ul class="breakout">
+		<li>
+			<a
+				class="grid gap-4 lg:grid-cols-3 lg:grid-rows-2"
+				href="/play/frontend-quiz"
+			>
+				<h2 class="text-3xl">Frontend Quiz App</h2>
+				<Picture
+					pictureAttributes={{
+						class: 'lg:order-first lg:row-span-2 lg:col-span-2',
+					}}
+					class="rounded shadow"
+					src={frontendQuizHero}
+					formats={['avif', 'webp']}
+					alt="The start view of the Frontend Quiz, as seen on a desktop"
+				/>
+				<p>
+					Test your frontend skills in a variety of subjects, by answering
+					multiple choice questions!
+				</p>
+			</a>
+		</li>
+	</ul>
 </Layout>
