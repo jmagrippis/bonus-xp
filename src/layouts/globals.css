@@ -43,7 +43,7 @@
 
 		/* light */
 		--foreground-brand-color-light: var(--brand-hue) 10% 10%;
-		--foreground-emphasis-color-light: var(--accent-hue) 81% 40%;
+		--foreground-accent-color-light: var(--accent-hue) 81% 40%;
 
 		--surface-brand-1-color-light: var(--brand-hue) 73% 97%;
 		--surface-brand-2-color-light: var(--brand-hue) 85% 90%;
