@@ -1,0 +1,53 @@
+---
+import FrontendQuizLayout from '@/layouts/FrontendQuizLayout.astro'
+import IconLabel from '@/components/play/frontend-quiz/IconLabel.astro'
+import SubtleText from '@/components/play/frontend-quiz/SubtleText.astro'
+import Stepper from '@/components/play/frontend-quiz/Stepper.astro'
+import {subjects} from '../_subjects'
+
+export const prerender = false
+
+const {slug} = Astro.params
+const subject = subjects.find((s) => s.slug === slug)
+if (!subject) return Astro.redirect('/404')
+
+const {name, icon: Icon, hsl} = subject
+
+const currentQuestionNumber = 6
+const totalQuestions = 10
+
+const meta = {
+	title: `${name} | Frontend Quiz`,
+	description: `Test your ${name} skills with these multiple choice questions!`,
+}
+---
+
+<FrontendQuizLayout meta={meta}>
+	<h1
+		class="mb-10 flex items-center gap-4 text-lg font-medium md:gap-8 md:text-2xl"
+	>
+		<IconLabel hsl={hsl}>
+			<Icon />
+		</IconLabel>
+		{name}
+	</h1>
+	<div class="grid gap-10 md:gap-16 lg:grid-cols-2 lg:pt-[10vh]">
+		<section>
+			<div class="mb-6 flex flex-col gap-3 md:mb-10 md:gap-7">
+				<SubtleText>
+					Question {currentQuestionNumber} from {totalQuestions}
+				</SubtleText>
+				<p class="text-xl font-medium md:text-3xl">
+					Which of these color contrast ratios defines the minimum WCAG 2.1
+					Level AA requirement for normal text?
+				</p>
+			</div>
+			<Stepper
+				currentStep={currentQuestionNumber}
+				totalSteps={totalQuestions}
+			/>
+		</section>
+
+		<form>[IMPLEMENT QUESTIONS HERE]</form>
+	</div>
+</FrontendQuizLayout>

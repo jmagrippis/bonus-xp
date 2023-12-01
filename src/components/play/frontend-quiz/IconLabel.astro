@@ -1,0 +1,14 @@
+---
+const {hsl = ''} = Astro.props
+const [h, s] = hsl.split(' ')
+---
+
+<span
+	style={{
+		color: `hsl(${hsl})`,
+		backgroundColor: `hsl(${h} min(calc(${s} + 20%), 100%) 95%)`,
+	}}
+	class="relative grid h-10 w-10 place-content-center rounded-lg md:h-14 md:w-14"
+>
+	<slot />
+</span>

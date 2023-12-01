@@ -1,0 +1,34 @@
+---
+import Layout, {type Meta} from '@/layouts/Layout.astro'
+
+type Props = {
+	meta?: Meta
+}
+
+const {meta} = Astro.props
+---
+
+<Layout meta={meta}>
+	<div class="breakout pt-[5vh] lg:pt-[10vh]">
+		<slot />
+	</div>
+</Layout>
+
+<style lang="postcss">
+	div {
+		--diameter: max(100vh, 100vw);
+		position: relative;
+
+		&:before {
+			content: '';
+			position: absolute;
+			left: calc(var(--diameter) * -0.5);
+			width: var(--diameter);
+			height: var(--diameter);
+			z-index: -1;
+			border: 160px hsl(var(--surface-brand-2-color)) solid;
+			opacity: 15%;
+			border-radius: 100%;
+		}
+	}
+</style>

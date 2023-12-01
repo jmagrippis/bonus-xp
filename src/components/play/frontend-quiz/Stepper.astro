@@ -1,0 +1,27 @@
+---
+type Props = {
+	currentStep: number
+	totalSteps: number
+}
+
+const {currentStep, totalSteps} = Astro.props
+
+const width = `${Math.min(Math.ceil((currentStep / totalSteps) * 100), 100)}%`
+---
+
+<div
+	style={{'--width': `${width}`}}
+	class="h-4 w-full rounded-full bg-surface-brand-2 p-1"
+>
+	<span class="block h-2 rounded-full bg-foreground-accent"></span>
+</div>
+
+<style>
+	:root {
+		--width: 100%;
+
+		span {
+			width: var(--width);
+		}
+	}
+</style>
