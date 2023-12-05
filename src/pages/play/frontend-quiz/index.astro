@@ -28,15 +28,17 @@ const meta = {
 			{
 				subjects.map(({name, slug, icon: Icon, hsl}) => (
 					<li class="cursor-pointer rounded-xl border border-surface-brand-2 bg-surface-brand-2 p-3 text-lg font-medium shadow md:text-2xl">
-						<a
-							href={`/play/frontend-quiz/${slug}`}
-							class="flex items-center gap-4 md:gap-8"
-						>
-							<IconLabel hsl={hsl}>
-								<Icon />
-							</IconLabel>
-							<span>{name}</span>
-						</a>
+						<h2>
+							<a
+								href={`/play/frontend-quiz/${slug}`}
+								class="flex items-center gap-4 md:gap-8"
+							>
+								<IconLabel hsl={hsl}>
+									<Icon />
+								</IconLabel>
+								<span>{name}</span>
+							</a>
+						</h2>
 					</li>
 				))
 			}
