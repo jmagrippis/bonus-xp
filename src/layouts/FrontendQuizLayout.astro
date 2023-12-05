@@ -18,6 +18,8 @@ const {meta} = Astro.props
 <style>
 	.bg-circle {
 		--diameter: max(100vh, 100vw);
+		--opacity: 50%;
+
 		position: fixed;
 		top: 0;
 		left: calc(var(--diameter) * -0.5);
@@ -25,7 +27,13 @@ const {meta} = Astro.props
 		height: var(--diameter);
 		z-index: -1;
 		border: 160px hsl(var(--surface-brand-2-color)) solid;
-		opacity: 15%;
+		opacity: var(--opacity);
 		border-radius: 100%;
+	}
+
+	:global([data-theme='dark']) {
+		.bg-circle {
+			--opacity: 15%;
+		}
 	}
 </style>
