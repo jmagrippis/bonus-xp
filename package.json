@@ -22,13 +22,13 @@
 		"@vercel/og": "^0.5.20",
 		"astro": "^3.6.4",
 		"sharp": "^0.33.0",
-		"solid-js": "^1.8.6",
-		"tailwindcss": "^3.3.5",
+		"solid-js": "^1.8.7",
+		"tailwindcss": "^3.3.6",
 		"typescript": "^5.3.2"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.40.1",
-		"@types/node": "^20.10.1",
+		"@types/node": "^20.10.3",
 		"prettier": "^3.1.0",
 		"prettier-plugin-astro": "^0.12.2",
 		"prettier-plugin-tailwindcss": "^0.5.7"
