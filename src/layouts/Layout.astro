@@ -45,6 +45,7 @@ const ogImageUrl = meta?.ogImageUrl ?? defaultMeta.ogImageUrl
 		document.documentElement.dataset.theme = theme
 	}
 
+	// set early so no page flashes / CSS is made aware
 	setTheme(document)
 
 	document.addEventListener('astro:before-swap', (event) => {
