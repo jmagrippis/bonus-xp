@@ -27,10 +27,13 @@ const meta = {
 		<ul class="flex flex-col gap-3 md:gap-6">
 			{
 				subjects.map(({name, slug, icon: Icon, hsl}) => (
-					<li class="cursor-pointer rounded-xl border border-surface-brand-2 bg-surface-brand-2 p-3 text-lg font-medium shadow md:text-2xl">
+					<li
+						class="cursor-pointer rounded-xl border border-surface-brand-2 bg-surface-brand-2 p-3 text-lg font-medium shadow md:text-2xl"
+						transition:name={`subject-${slug}`}
+					>
 						<h2>
 							<a
-								href={`/play/frontend-quiz/${slug}`}
+								href={`/play/frontend-quiz/${slug}/1`}
 								class="flex items-center gap-4 md:gap-8"
 							>
 								<IconLabel hsl={hsl}>
