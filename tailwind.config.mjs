@@ -28,6 +28,8 @@ const config = {
 						1: withAlphaValue('surface-accent-1-color'),
 					},
 				},
+				success: withAlphaValue('success-color'),
+				error: withAlphaValue('error-color'),
 			},
 		},
 	},

@@ -1,0 +1,83 @@
+---
+import FrontendQuizLayout from '@/layouts/FrontendQuizLayout.astro'
+import SubtleText from '@/components/play/frontend-quiz/SubtleText.astro'
+import IconLabel from '@/components/play/frontend-quiz/IconLabel.astro'
+
+import {subjects} from '../../_subjects'
+
+export const prerender = false
+
+const {slug} = Astro.params
+const subject = subjects.find((s) => s.slug === slug)
+if (!subject) return Astro.redirect('/404')
+
+const cookieKey = `frontend-quiz:${slug}`
+
+if (!Astro.cookies.has(cookieKey)) {
+	Astro.redirect(`/play/frontend-quiz/${slug}`)
+}
+const answersCookie = Astro.cookies.get(cookieKey)
+type Answer = {selected: number; isCorrect: boolean}
+
+if (!answersCookie) {
+	Astro.redirect(`/play/frontend-quiz/${slug}`)
+}
+const answers: Answer[] = answersCookie?.json()
+if (answers.length !== subject.questions.length) {
+	Astro.redirect(`/play/frontend-quiz/${slug}`)
+}
+
+const correctAnswers = answers?.reduce(
+	(acc, {isCorrect}) => acc + (isCorrect ? 1 : 0),
+	0,
+)
+const totalAnswers = answers?.length
+
+const {name, icon: Icon, hsl} = subject
+
+const meta = {
+	title: `Completed ${name} | Frontend Quiz`,
+	description: `These are your results for completing the ${name} quiz!`,
+}
+---
+
+<FrontendQuizLayout meta={meta}>
+	<div
+		class="mb-10 flex items-center gap-4 text-lg font-medium md:gap-8 md:text-2xl"
+		transition:name={`subject-${slug}`}
+	>
+		<IconLabel hsl={hsl}>
+			<Icon />
+		</IconLabel>
+		{name}
+	</div>
+	<div class="grid gap-10 md:gap-16 lg:grid-cols-2">
+		<section class="flex flex-col gap-4 lg:gap-12">
+			<h1 class="flex flex-col gap-2 text-4xl lg:text-5xl">
+				Quiz completed <strong>You scored...</strong>
+			</h1>
+		</section>
+		<section class="flex flex-col gap-3 md:gap-6">
+			<div
+				class="flex flex-col items-center rounded-xl bg-surface-brand-2 p-8 md:p-12"
+			>
+				<h2
+					class="mb-4 flex items-center gap-4 text-lg font-medium md:mb-10 md:gap-8 md:text-2xl"
+				>
+					<IconLabel hsl={hsl}>
+						<Icon />
+					</IconLabel>
+					{name}
+				</h2>
+				<div class="mb-4 text-9xl font-medium">{correctAnswers}</div>
+				<div class="text-foreground-brand/70">out of {totalAnswers}</div>
+			</div>
+			<a
+				href="/play/frontend-quiz"
+				class="w-full rounded-xl bg-surface-accent-1 p-3 text-center text-lg font-medium shadow transition-[filter] duration-300 hover:brightness-150 md:text-2xl"
+			>
+				Play Again
+			</a>
+		</section>
+	</div>
+</FrontendQuizLayout>

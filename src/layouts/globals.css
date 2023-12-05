@@ -51,6 +51,8 @@
 		--surface-brand-2-color-light: var(--brand-hue) 85% 90%;
 		--surface-accent-1-color-light: var(--accent-hue) 85% 90%;
 
+		--success-color-light: 151deg 70% 50%;
+		--error-color-light: 0deg 82% 63%;
 		/* dark */
 		--foreground-brand-color-dark: var(--brand-hue) 100% 97%;
 		--foreground-accent-color-dark: var(--accent-hue) 78% 60%;
@@ -58,6 +60,9 @@
 		--surface-brand-1-color-dark: var(--brand-hue) 90% 6%;
 		--surface-brand-2-color-dark: var(--brand-hue) 84% 17%;
 		--surface-accent-1-color-dark: var(--accent-hue) 90% 21%;
+
+		--success-color-dark: 151deg 70% 50%;
+		--error-color-dark: 0deg 82% 63%;
 	}
 
 	/* light theme setup */
@@ -70,6 +75,9 @@
 		--surface-brand-1-color: var(--surface-brand-1-color-light);
 		--surface-brand-2-color: var(--surface-brand-2-color-light);
 		--surface-accent-1-color: var(--surface-accent-1-color-light);
+
+		--success-color: var(--success-color-light);
+		--error-color: var(--error-color-light);
 	}
 
 	/* dark theme setup */
@@ -82,6 +90,9 @@
 		--surface-brand-1-color: var(--surface-brand-1-color-dark);
 		--surface-brand-2-color: var(--surface-brand-2-color-dark);
 		--surface-accent-1-color: var(--surface-accent-1-color-dark);
+
+		--success-color: var(--success-color-dark);
+		--error-color: var(--error-color-dark);
 	}
 
 	html {
