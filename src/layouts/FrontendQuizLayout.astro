@@ -11,24 +11,21 @@ const {meta} = Astro.props
 <Layout meta={meta}>
 	<div class="breakout pt-[5vh] lg:pt-[10vh]">
 		<slot />
+		<div class="bg-circle" transition:name="bg-circle"></div>
 	</div>
 </Layout>
 
-<style lang="postcss">
-	div {
+<style>
+	.bg-circle {
 		--diameter: max(100vh, 100vw);
-		position: relative;
-
-		&:before {
-			content: '';
-			position: absolute;
-			left: calc(var(--diameter) * -0.5);
-			width: var(--diameter);
-			height: var(--diameter);
-			z-index: -1;
-			border: 160px hsl(var(--surface-brand-2-color)) solid;
-			opacity: 15%;
-			border-radius: 100%;
-		}
+		position: fixed;
+		top: 0;
+		left: calc(var(--diameter) * -0.5);
+		width: var(--diameter);
+		height: var(--diameter);
+		z-index: -1;
+		border: 160px hsl(var(--surface-brand-2-color)) solid;
+		opacity: 15%;
+		border-radius: 100%;
 	}
 </style>
