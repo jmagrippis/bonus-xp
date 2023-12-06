@@ -122,9 +122,9 @@ if (Astro.request.method === 'POST') {
 									{alreadyAnswered &&
 									answers[questionNumber - 1].selected === i ? (
 										answers[questionNumber - 1].isCorrect ? (
-											<CorrectIcon class="text-success w-8 md:w-10" />
+											<CorrectIcon class="w-8 text-success md:w-10" />
 										) : (
-											<ErrorIcon class="text-error w-8 md:w-10" />
+											<ErrorIcon class="w-8 text-error md:w-10" />
 										)
 									) : null}
 								</label>

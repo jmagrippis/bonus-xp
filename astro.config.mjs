@@ -11,11 +11,9 @@ export default defineConfig({
 		: process.env.VERCEL_URL
 		  ? `https://${process.env.VERCEL_URL}`
 		  : 'http://localhost:4321',
-	experimental: {
-		i18n: {
-			defaultLocale: 'en',
-			locales: ['en', 'el'],
-		},
+	i18n: {
+		defaultLocale: 'en',
+		locales: ['en', 'el'],
 	},
 	markdown: {
 		shikiConfig: {
