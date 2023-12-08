@@ -1,10 +1,10 @@
 ---
-import ThemeToggle from './ThemeToggle.astro'
+import ThemeToggle from './ThemeToggle.svelte'
 ---
 
 <header
 	class="sticky top-0 z-50 flex items-center justify-between bg-surface-brand-2/80 p-4 backdrop-blur-sm"
 >
 	<a href="/" class="font-extralight">Bonus XP</a>
-	<ThemeToggle />
+	<ThemeToggle client:idle />
 </header>

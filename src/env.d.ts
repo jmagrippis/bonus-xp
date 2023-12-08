@@ -3,4 +3,5 @@
 
 interface Window {
 	toggleTheme?(): void
+	toggleSubTheme?(): void
 }

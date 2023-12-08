@@ -43,6 +43,8 @@
 		--brand-hue: 158deg;
 		--accent-hue: 271deg;
 
+		--font-sans: 'Raleway Variable', system-ui, sans-serif;
+
 		/* light */
 		--foreground-brand-color-light: var(--brand-hue) 10% 10%;
 		--foreground-accent-color-light: var(--accent-hue) 81% 40%;

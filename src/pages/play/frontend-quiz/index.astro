@@ -4,6 +4,7 @@ import SubtleText from '@/components/play/frontend-quiz/SubtleText.astro'
 import IconLabel from '@/components/play/frontend-quiz/IconLabel.astro'
 
 import {subjects} from './_subjects'
+import SubThemeToggle from '@/components/play/frontend-quiz/SubThemeToggle.svelte'
 
 export const prerender = false
 
@@ -15,6 +16,9 @@ const meta = {
 ---
 
 <FrontendQuizLayout meta={meta}>
+	<div class="mb-6 flex justify-end lg:mb-12">
+		<SubThemeToggle client:idle />
+	</div>
 	<div class="grid gap-10 md:gap-16 lg:grid-cols-2">
 		<section class="flex flex-col gap-4 lg:gap-12">
 			<h1 class="flex flex-col gap-2 text-4xl lg:text-5xl">
