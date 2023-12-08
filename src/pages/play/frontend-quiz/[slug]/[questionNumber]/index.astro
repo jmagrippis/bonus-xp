@@ -3,10 +3,9 @@ import FrontendQuizLayout from '@/layouts/FrontendQuizLayout.astro'
 import IconLabel from '@/components/play/frontend-quiz/IconLabel.astro'
 import SubtleText from '@/components/play/frontend-quiz/SubtleText.astro'
 import Stepper from '@/components/play/frontend-quiz/Stepper.astro'
-import CorrectIcon from '@/components/play/frontend-quiz/icons/CorrectIcon.astro'
 import {subjects} from '../../_subjects'
-import ErrorIcon from '@/components/play/frontend-quiz/icons/ErrorIcon.astro'
 import SubThemeToggle from '@/components/play/frontend-quiz/SubThemeToggle.svelte'
+import AnswersForm from '@/components/play/frontend-quiz/AnswersForm.svelte'
 
 export const prerender = false
 
@@ -18,7 +17,10 @@ const questionNumber = parseInt(questionNumberString)
 const currentQuestion = subject.questions[questionNumber - 1]
 if (!currentQuestion) return Astro.redirect('/404')
 
-type Answer = {selected: number; isCorrect: boolean}
+type Answer = {
+	selected: number
+	actual: number
+}
 let answers: Answer[] = []
 const cookieKey = `frontend-quiz:${slug}`
 if (Astro.cookies.has(cookieKey)) {
@@ -43,9 +45,9 @@ if (Astro.request.method === 'POST') {
 		const correctAnswerIndex = currentQuestion.options.findIndex(
 			(option) => option === currentQuestion.answer,
 		)
-		const isCorrect = correctAnswerIndex === parseInt(answerIndex)
 
-		answers[questionNumber - 1] = {selected: parseInt(answerIndex), isCorrect}
+		const result = {selected: parseInt(answerIndex), actual: correctAnswerIndex}
+		answers[questionNumber - 1] = result
 		const ONE_YEAR_IN_SECONDS = 60 * 60 * 24 * 365
 		Astro.cookies.set(cookieKey, JSON.stringify(answers), {
 			maxAge: ONE_YEAR_IN_SECONDS,
@@ -53,6 +55,8 @@ if (Astro.request.method === 'POST') {
 			sameSite: true,
 			httpOnly: true,
 		})
+
+		// return new Response(JSON.stringify(result), {status: 200})
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error.message)
@@ -88,125 +92,14 @@ if (Astro.request.method === 'POST') {
 			<Stepper currentStep={questionNumber} totalSteps={totalQuestions} />
 		</section>
 
-		<form method="POST" class="flex flex-col gap-4 md:gap-8">
-			<fieldset
-				class=`answer flex flex-col gap-4 md:gap-8 ${answers[questionNumber -1] ? 'pointer-events-none' : ''}`
-			>
-				<legend class="sr-only"
-					>Please select one answer to the question: {
-						currentQuestion.question
-					}</legend
-				>
-				{
-					currentQuestion.options.map((value, i) => {
-						const alreadyAnswered = answers[questionNumber - 1]
-						return (
-							<div class="answer-toggle">
-								<input
-									id={`answer-${i}`}
-									name="answer"
-									type="radio"
-									value={i}
-									class="peer appearance-none focus:outline-none"
-									checked={answers[questionNumber - 1]?.selected === i}
-									required
-									{...{
-										'data-is-correct': alreadyAnswered
-											? `${answers[questionNumber - 1].isCorrect}`
-											: undefined,
-									}}
-								/>
-								<label
-									class="flex cursor-pointer items-center gap-4 rounded-xl border-2 border-surface-brand-2 bg-surface-brand-2 p-3 text-lg font-medium shadow transition-colors md:gap-8 md:text-2xl"
-									for={`answer-${i}`}
-								>
-									<span class="answer-value transition-color grid h-12 w-12 place-items-center rounded-xl bg-slate-100 text-slate-500 duration-300">
-										{String.fromCharCode(64 + i + 1)}
-									</span>
-									<span>{value}</span>
-									{alreadyAnswered &&
-									answers[questionNumber - 1].selected === i ? (
-										answers[questionNumber - 1].isCorrect ? (
-											<CorrectIcon class="w-8 text-success md:w-10" />
-										) : (
-											<ErrorIcon class="w-8 text-error md:w-10" />
-										)
-									) : null}
-								</label>
-							</div>
-						)
-					})
-				}
-			</fieldset>
-
-			{
-				answers[questionNumber - 1] ? (
-					questionNumber === totalQuestions ? (
-						<a
-							href={`/play/frontend-quiz/${slug}/results`}
-							class="w-full rounded-xl bg-surface-accent-1 p-3 text-center text-lg font-medium shadow transition-[filter] duration-300 hover:brightness-150 md:text-2xl"
-						>
-							Show Results!
-						</a>
-					) : (
-						<a
-							href={`/play/frontend-quiz/${slug}/${questionNumber + 1}`}
-							class="w-full rounded-xl bg-surface-accent-1 p-3 text-center text-lg font-medium text-white shadow transition-[filter] duration-300 hover:brightness-150 md:text-2xl"
-						>
-							Next Question
-						</a>
-					)
-				) : (
-					<button class="w-full rounded-xl bg-surface-accent-1 p-3 text-lg font-medium shadow transition-[filter] duration-300 hover:brightness-150 md:text-2xl">
-						Submit Answer
-					</button>
-				)
-			}
-		</form>
+		<AnswersForm
+			question={currentQuestion.question}
+			questionNumber={questionNumber}
+			options={currentQuestion.options}
+			answer={answers[questionNumber - 1] ?? null}
+			areThereMoreQuestions={questionNumber < totalQuestions}
+			slug={slug}
+			client:load
+		/>
 	</div>
 </FrontendQuizLayout>
-
-<style lang="postcss">
-	.answer {
-		> .answer-toggle {
-			@apply grid w-full;
-
-			> * {
-				grid-area: 1/1;
-			}
-
-			> input {
-				&:checked[data-is-correct='true'] ~ label {
-					@apply border-success;
-
-					.answer-value {
-						@apply bg-success text-white;
-					}
-				}
-
-				&:checked[data-is-correct='false'] ~ label {
-					@apply border-error;
-
-					.answer-value {
-						@apply bg-error text-white;
-					}
-				}
-
-				&:not([data-is-correct]) {
-					&:checked ~ label {
-						@apply border-surface-accent-1;
-						.answer-value {
-							@apply bg-surface-accent-1 text-white;
-						}
-					}
-				}
-
-				&:not(:checked):is(:focus-within, :hover) ~ label {
-					.answer-value {
-						@apply bg-surface-accent-1/20 text-foreground-accent;
-					}
-				}
-			}
-		}
-	}
-</style>
