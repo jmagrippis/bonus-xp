@@ -2,15 +2,12 @@
 	import CorrectIcon from './icons/CorrectIcon.svelte'
 	import ErrorIcon from './icons/ErrorIcon.svelte'
 
+	import type {Answer} from '@/pages/play/frontend-quiz/_types'
+
 	export let question: string
 	export let questionNumber: number
 
 	export let options: string[]
-
-	type Answer = {
-		selected: number
-		actual: number
-	}
 
 	export let answer: Answer | null
 

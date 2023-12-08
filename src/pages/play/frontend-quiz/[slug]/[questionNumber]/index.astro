@@ -6,6 +6,7 @@ import Stepper from '@/components/play/frontend-quiz/Stepper.astro'
 import {subjects} from '../../_subjects'
 import SubThemeToggle from '@/components/play/frontend-quiz/SubThemeToggle.svelte'
 import AnswersForm from '@/components/play/frontend-quiz/AnswersForm.svelte'
+import type {Answer} from '../../_types'
 
 export const prerender = false
 
@@ -17,10 +18,6 @@ const questionNumber = parseInt(questionNumberString)
 const currentQuestion = subject.questions[questionNumber - 1]
 if (!currentQuestion) return Astro.redirect('/404')
 
-type Answer = {
-	selected: number
-	actual: number
-}
 let answers: Answer[] = []
 const cookieKey = `frontend-quiz:${slug}`
 if (Astro.cookies.has(cookieKey)) {
