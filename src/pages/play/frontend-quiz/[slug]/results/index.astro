@@ -5,6 +5,7 @@ import IconLabel from '@/components/play/frontend-quiz/IconLabel.astro'
 
 import {subjects} from '../../_subjects'
 import SubThemeToggle from '@/components/play/frontend-quiz/SubThemeToggle.svelte'
+import type {Answer} from '../../_types'
 
 export const prerender = false
 
@@ -18,7 +19,6 @@ if (!Astro.cookies.has(cookieKey)) {
 	Astro.redirect(`/play/frontend-quiz/${slug}`)
 }
 const answersCookie = Astro.cookies.get(cookieKey)
-type Answer = {selected: number; isCorrect: boolean}
 
 if (!answersCookie) {
 	Astro.redirect(`/play/frontend-quiz/${slug}`)
@@ -29,7 +29,7 @@ if (answers.length !== subject.questions.length) {
 }
 
 const correctAnswers = answers?.reduce(
-	(acc, {isCorrect}) => acc + (isCorrect ? 1 : 0),
+	(acc, {selected, actual}) => acc + (selected === actual ? 1 : 0),
 	0,
 )
 const totalAnswers = answers?.length
