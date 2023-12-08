@@ -3,6 +3,7 @@
 	on:click={() => {
 		window.toggleSubTheme && window.toggleSubTheme()
 	}}
+	style="view-transition-name: sub-theme-toggle;"
 >
 	<span class="sr-only">toggle subtheme</span>
 	<div
