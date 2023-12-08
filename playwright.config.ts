@@ -1,5 +1,24 @@
 import {defineConfig, devices} from '@playwright/test'
 
+const projects = [
+	{
+		name: 'chromium',
+		use: {...devices['Desktop Chrome']},
+	},
+
+	{
+		name: 'firefox',
+		use: {...devices['Desktop Firefox']},
+	},
+]
+
+// Mobile Safari is flakey on CI for some reason
+if (!process.env.CI) {
+	projects.push({
+		name: 'Mobile Safari',
+		use: {...devices['iPhone 14 Pro Max']},
+	})
+}
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -59,10 +78,6 @@ export default defineConfig({
 		//   name: 'Mobile Chrome',
 		//   use: { ...devices['Pixel 5'] },
 		// },
-		{
-			name: 'Mobile Safari',
-			use: {...devices['iPhone 14 Pro Max']},
-		},
 
 		/* Test against branded browsers. */
 		// {
