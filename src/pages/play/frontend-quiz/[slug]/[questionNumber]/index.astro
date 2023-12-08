@@ -96,7 +96,6 @@ if (Astro.request.method === 'POST') {
 			answer={answers[questionNumber - 1] ?? null}
 			areThereMoreQuestions={questionNumber < totalQuestions}
 			slug={slug}
-			client:load
 		/>
 	</div>
 </FrontendQuizLayout>
