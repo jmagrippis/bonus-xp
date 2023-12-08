@@ -1,6 +1,7 @@
----
-const {class: className} = Astro.props
----
+<script lang="ts">
+	let className = ''
+	export {className as class}
+</script>
 
 <svg
 	class={className}
