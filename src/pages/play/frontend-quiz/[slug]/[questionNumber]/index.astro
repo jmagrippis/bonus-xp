@@ -6,6 +6,7 @@ import Stepper from '@/components/play/frontend-quiz/Stepper.astro'
 import CorrectIcon from '@/components/play/frontend-quiz/icons/CorrectIcon.astro'
 import {subjects} from '../../_subjects'
 import ErrorIcon from '@/components/play/frontend-quiz/icons/ErrorIcon.astro'
+import SubThemeToggle from '@/components/play/frontend-quiz/SubThemeToggle.svelte'
 
 export const prerender = false
 
@@ -61,15 +62,19 @@ if (Astro.request.method === 'POST') {
 ---
 
 <FrontendQuizLayout meta={meta}>
-	<h1
-		class="mb-10 flex items-center gap-4 text-lg font-medium md:gap-8 md:text-2xl"
-		transition:name={`subject-${slug}`}
-	>
-		<IconLabel hsl={hsl}>
-			<Icon />
-		</IconLabel>
-		{name}
-	</h1>
+	<div class="mb-10 flex items-center justify-between">
+		<h1
+			class="flex items-center gap-4 text-lg font-medium md:gap-8 md:text-2xl"
+			transition:name={`subject-${slug}`}
+		>
+			<IconLabel hsl={hsl}>
+				<Icon />
+			</IconLabel>
+			{name}
+		</h1>
+
+		<SubThemeToggle client:idle />
+	</div>
 	<div class="grid gap-10 md:gap-16 lg:grid-cols-2 lg:pt-[10vh]">
 		<section>
 			<div class="mb-6 flex flex-col gap-3 md:mb-10 md:gap-7">
@@ -146,7 +151,7 @@ if (Astro.request.method === 'POST') {
 					) : (
 						<a
 							href={`/play/frontend-quiz/${slug}/${questionNumber + 1}`}
-							class="w-full rounded-xl bg-surface-accent-1 p-3 text-center text-lg font-medium shadow transition-[filter] duration-300 hover:brightness-150 md:text-2xl"
+							class="w-full rounded-xl bg-surface-accent-1 p-3 text-center text-lg font-medium text-white shadow transition-[filter] duration-300 hover:brightness-150 md:text-2xl"
 						>
 							Next Question
 						</a>

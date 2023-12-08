@@ -9,7 +9,7 @@ const config = {
 	content: ['./src/**/*.{astro,html,md,mdx,svelte,ts,tsx}'],
 	theme: {
 		fontFamily: {
-			sans: "'Raleway Variable', system-ui, sans-serif",
+			sans: 'var(--font-sans)',
 		},
 		extend: {
 			colors: {
