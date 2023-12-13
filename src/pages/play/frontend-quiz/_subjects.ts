@@ -200,8 +200,8 @@ export const subjects = [
 			},
 			{
 				question: 'How to write an IF statement in JavaScript?',
-				options: ['if i = 5 then', 'if (i == 5)', 'if i == 5', 'if i = 5'],
-				answer: 'if (i == 5)',
+				options: ['if i = 5 then', 'if (i === 5)', 'if i === 5', 'if i = 5'],
+				answer: 'if (i === 5)',
 			},
 			{
 				question:
@@ -209,10 +209,10 @@ export const subjects = [
 				options: [
 					'if (i <> 5)',
 					'if i =! 5 then',
-					'if (i != 5)',
-					'if i not = 5',
+					'if (i !== 5)',
+					'if i not 5',
 				],
-				answer: 'if (i != 5)',
+				answer: 'if (i !== 5)',
 			},
 			{
 				question: 'How does a FOR loop start?',
@@ -237,12 +237,12 @@ export const subjects = [
 			{
 				question: 'What is the correct way to write a JavaScript array?',
 				options: [
-					"var colors = (1:'red', 2:'green', 3:'blue')",
-					"var colors = ['red', 'green', 'blue']",
-					"var colors = 'red', 'green', 'blue'",
-					"var colors = 1 = ('red'), 2 = ('green'), 3 = ('blue')",
+					"const colors = (1:'red', 2:'green', 3:'blue')",
+					"const colors = ['red', 'green', 'blue']",
+					"const colors = 'red', 'green', 'blue'",
+					"const colors = 1 = ('red'), 2 = ('green'), 3 = ('blue')",
 				],
-				answer: "var colors = ['red', 'green', 'blue']",
+				answer: "const colors = ['red', 'green', 'blue']",
 			},
 			{
 				question:
@@ -263,12 +263,12 @@ export const subjects = [
 			{
 				question: 'What is the correct way to write a JavaScript object?',
 				options: [
-					"var person = {firstName: 'John', lastName: 'Doe'};",
-					"var person = {firstName = 'John', lastName = 'Doe'};",
-					"var person = (firstName: 'John', lastName: 'Doe');",
-					"var person = (firstName = 'John', lastName = 'Doe');",
+					"const person = {firstName: 'John', lastName: 'Doe'};",
+					"const person = {firstName = 'John', lastName = 'Doe'};",
+					"const person = (firstName: 'John', lastName: 'Doe');",
+					"const person = (firstName = 'John', lastName = 'Doe');",
 				],
-				answer: "var person = {firstName: 'John', lastName: 'Doe'};",
+				answer: "const person = {firstName: 'John', lastName: 'Doe'};",
 			},
 		],
 	},
