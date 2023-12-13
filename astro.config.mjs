@@ -10,8 +10,8 @@ export default defineConfig({
 	site: process.env.PUBLIC_ROOT_URL
 		? process.env.PUBLIC_ROOT_URL
 		: process.env.VERCEL_URL
-		  ? `https://${process.env.VERCEL_URL}`
-		  : 'http://localhost:4321',
+			? `https://${process.env.VERCEL_URL}`
+			: 'http://localhost:4321',
 	i18n: {
 		defaultLocale: 'en',
 		locales: ['en', 'el'],

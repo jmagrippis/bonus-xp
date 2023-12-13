@@ -12,16 +12,16 @@
 		"test:e2e": "playwright test"
 	},
 	"dependencies": {
-		"@astrojs/check": "^0.3.1",
-		"@astrojs/mdx": "^2.0.0",
+		"@astrojs/check": "^0.3.2",
+		"@astrojs/mdx": "^2.0.1",
 		"@astrojs/solid-js": "^3.0.2",
-		"@astrojs/svelte": "^5.0.0",
+		"@astrojs/svelte": "^5.0.1",
 		"@astrojs/tailwind": "^5.0.3",
-		"@astrojs/vercel": "^6.0.1",
+		"@astrojs/vercel": "^6.0.2",
 		"@fontsource-variable/raleway": "^5.0.17",
 		"@tailwindcss/typography": "^0.5.10",
 		"@vercel/og": "^0.5.20",
-		"astro": "^4.0.3",
+		"astro": "^4.0.4",
 		"sharp": "^0.33.0",
 		"solid-js": "^1.8.7",
 		"svelte": "^4.2.8",
@@ -33,12 +33,12 @@
 		"@playwright/test": "^1.40.1",
 		"@types/node": "^20.10.4",
 		"autoprefixer": "^10.4.16",
-		"prettier": "^3.1.0",
+		"prettier": "^3.1.1",
 		"prettier-plugin-astro": "^0.12.2",
 		"prettier-plugin-svelte": "^3.1.2",
 		"prettier-plugin-tailwindcss": "^0.5.9"
 	},
-	"packageManager": "pnpm@8.11.0",
+	"packageManager": "pnpm@8.12.0",
 	"volta": {
 		"node": "18.19.0"
 	}
