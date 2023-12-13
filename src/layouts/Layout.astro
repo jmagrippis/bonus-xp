@@ -30,52 +30,91 @@ const ogImageUrl = meta?.ogImageUrl ?? defaultMeta.ogImageUrl
 ---
 
 <!doctype html>
-<script is:inline>
-	// default to dark mode, because **I** like it more :-)
-	const defaultTheme = 'dark'
-	const getTheme = () => {
-		if (typeof localStorage !== 'undefined') {
-			return localStorage.getItem('theme') || defaultTheme
-		}
-		return defaultTheme
-	}
-
-	const setTheme = (document) => {
-		const theme = getTheme()
-		document.documentElement.dataset.theme = theme
-	}
-
-	// set early so no page flashes / CSS is made aware
-	setTheme(document)
-
-	document.addEventListener('astro:before-swap', (event) => {
-		// Ensure theme is set for view transitons
-		setTheme(event.newDocument)
-	})
-
-	const observer = new MutationObserver(() => {
-		const nextTheme = document.documentElement.dataset.theme
-		if (nextTheme) {
-			localStorage.setItem('theme', nextTheme)
-		}
-	})
-	observer.observe(document.documentElement, {
-		attributes: true,
-		attributeFilter: ['data-theme'],
-	})
-
-	const toggleTheme = () => {
-		const nextTheme =
-			document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'
-		document.documentElement.dataset.theme = nextTheme
-	}
-
-	window.toggleTheme = toggleTheme
-</script>
-
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
+		<script is:inline>
+			// default to dark mode, because **I** like it more :-)
+			const defaultTheme = 'dark'
+			const getTheme = () => {
+				if (typeof localStorage !== 'undefined') {
+					return localStorage.getItem('theme') || defaultTheme
+				}
+				return defaultTheme
+			}
+
+			const setTheme = (document) => {
+				const theme = getTheme()
+				document.documentElement.dataset.theme = theme
+			}
+
+			// set early so no page flashes / CSS is made aware
+			setTheme(document)
+
+			const observer = new MutationObserver(() => {
+				const nextTheme = document.documentElement.dataset.theme
+				if (nextTheme) {
+					localStorage.setItem('theme', nextTheme)
+				}
+			})
+			observer.observe(document.documentElement, {
+				attributes: true,
+				attributeFilter: ['data-theme'],
+			})
+
+			const toggleTheme = () => {
+				const nextTheme =
+					document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'
+				document.documentElement.dataset.theme = nextTheme
+			}
+
+			// subtheme
+			const getSubTheme = () => {
+				if (typeof localStorage !== 'undefined') {
+					return localStorage.getItem('sub-theme') || 'bonus'
+				}
+				return 'bonus'
+			}
+
+			const setSubTheme = (document) => {
+				const subTheme = getSubTheme()
+				document.documentElement.dataset.subTheme = subTheme
+			}
+
+			// set early so no page flashes / CSS is made aware
+			setSubTheme(document)
+
+			const subThemeObserver = new MutationObserver(() => {
+				const nextSubTheme = document.documentElement.dataset.subTheme
+				if (nextSubTheme) {
+					localStorage.setItem('sub-theme', nextSubTheme)
+				}
+			})
+
+			subThemeObserver.observe(document.documentElement, {
+				attributes: true,
+				attributeFilter: ['data-sub-theme'],
+			})
+
+			const toggleSubTheme = () => {
+				const nextSubTheme =
+					document.documentElement.dataset.subTheme === 'bonus'
+						? 'mentor'
+						: 'bonus'
+				document.documentElement.dataset.subTheme = nextSubTheme
+			}
+
+			// listeners
+
+			document.addEventListener('astro:before-swap', (event) => {
+				// Ensure theme is set for view transitons
+				setTheme(event.newDocument)
+				setSubTheme(event.newDocument)
+			})
+
+			window.toggleTheme = toggleTheme
+			window.toggleSubTheme = toggleSubTheme
+		</script>
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 

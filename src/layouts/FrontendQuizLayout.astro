@@ -9,48 +9,6 @@ type Props = {
 const {meta} = Astro.props
 ---
 
-<script is:inline>
-	const defaultSubTheme = 'bonus'
-	const getSubTheme = () => {
-		if (typeof localStorage !== 'undefined') {
-			return localStorage.getItem('sub-theme') || defaultSubTheme
-		}
-		return defaultSubTheme
-	}
-
-	const setSubTheme = (document) => {
-		const subTheme = getSubTheme()
-		document.documentElement.dataset.subTheme = subTheme
-	}
-
-	// set early so no page flashes / CSS is made aware
-	setSubTheme(document)
-
-	document.addEventListener('astro:before-swap', (event) => {
-		// Ensure subtheme is set for view transitons
-		setSubTheme(event.newDocument)
-	})
-
-	const subThemeObserver = new MutationObserver(() => {
-		const nextSubTheme = document.documentElement.dataset.subTheme
-		if (nextSubTheme) {
-			localStorage.setItem('sub-theme', nextSubTheme)
-		}
-	})
-
-	subThemeObserver.observe(document.documentElement, {
-		attributes: true,
-		attributeFilter: ['data-sub-theme'],
-	})
-
-	const toggleSubTheme = () => {
-		const nextSubTheme =
-			document.documentElement.dataset.subTheme === 'bonus' ? 'mentor' : 'bonus'
-		document.documentElement.dataset.subTheme = nextSubTheme
-	}
-
-	window.toggleSubTheme = toggleSubTheme
-</script>
 <Layout meta={meta}>
 	<div id="frontend-quiz-container" class="breakout pt-[5vh] lg:pt-[10vh]">
 		<slot />
@@ -59,7 +17,7 @@ const {meta} = Astro.props
 </Layout>
 
 <style>
-	:global([data-sub-theme='mentor']) {
+	:global(:root[data-sub-theme='mentor']) {
 		--font-sans: 'Rubik Variable', system-ui, sans-serif;
 
 		/* light */
