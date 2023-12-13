@@ -46,17 +46,17 @@ test('can go through the whole quiz', async ({page}) => {
 
 	// Make it all the way to the results page
 	await answerAndGo('myFunction()')
-	await answerAndGo('if i == 5')
-	await answerAndGo('if (i != 5)')
+	await answerAndGo('if i === 5')
+	await answerAndGo('if (i !== 5)')
 	await answerAndGo('for (i = 0; i <= 5; i++)')
 	await answerAndGo('//This is a single-line comment')
-	await answerAndGo("var colors = ['red', 'green', 'blue']")
+	await answerAndGo("const colors = ['red', 'green', 'blue']")
 	await answerAndGo('Math.max(x, y)')
 	await answerAndGo('=')
 
 	// Answer final question
 	await page
-		.getByText("var person = {firstName: 'John', lastName: 'Doe'};")
+		.getByText("const person = {firstName: 'John', lastName: 'Doe'};")
 		.check()
 	await page.getByRole('button', {name: 'Submit Answer'}).click()
 	await page.getByRole('link', {name: 'Show Results!'}).click()
