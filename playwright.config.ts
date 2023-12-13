@@ -96,6 +96,6 @@ export default defineConfig({
 				command: 'pnpm run dev',
 				port: 4321,
 				reuseExistingServer: true,
-		  }
+			}
 		: undefined,
 })
